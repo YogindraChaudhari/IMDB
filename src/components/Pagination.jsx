@@ -1,15 +1,50 @@
 import React from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 function Pagination({handlePrevious, handleNext, pageNo}) {
   return (
-    <div className='bg-gray-400 p-4 m-8 flex justify-center'>
-        <div onClick={handlePrevious} className='px-8 text-xl'>
-            <i class="fa-solid fa-arrow-left"></i>
-        </div>
-            <div className='font-bold text-xl'>{pageNo}</div>
-        <div onClick={handleNext} className='px-8 text-xl'>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
+    <div className='bg-gray-200 dark:bg-gray-800 p-4 m-8 flex justify-center 
+      items-center rounded-lg shadow-md 
+      transition-colors duration-300'>
+      <button 
+        onClick={handlePrevious} 
+        disabled={pageNo === 1}
+        className='px-4 py-2 mr-4 
+          bg-white dark:bg-gray-700 
+          text-gray-700 dark:text-gray-300 
+          rounded-full 
+          hover:bg-gray-100 dark:hover:bg-gray-600 
+          disabled:opacity-50 disabled:cursor-not-allowed 
+          transition-all duration-300 
+          flex items-center justify-center'
+      >
+        <ChevronLeft className='mr-1' />
+        Prev
+      </button>
+      
+      <div className='px-4 py-2 
+        bg-blue-500 dark:bg-blue-700 
+        text-white 
+        rounded-full 
+        font-bold 
+        min-w-[60px] 
+        text-center'>
+        {pageNo}
+      </div>
+      
+      <button 
+        onClick={handleNext} 
+        className='px-4 py-2 ml-4 
+          bg-white dark:bg-gray-700 
+          text-gray-700 dark:text-gray-300 
+          rounded-full 
+          hover:bg-gray-100 dark:hover:bg-gray-600 
+          transition-all duration-300 
+          flex items-center justify-center'
+      >
+        Next
+        <ChevronRight className='ml-1' />
+      </button>
     </div>
   )
 }

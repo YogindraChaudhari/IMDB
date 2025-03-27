@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "localforage": "^1.10.0",
+    "lucide-react": "^0.484.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

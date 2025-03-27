@@ -1,17 +1,56 @@
-import React from 'react'
-import Logo from '../MovieLogo.jpg'
-import { Link } from 'react-router-dom'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
-  return (
-    <div className='flex border space-x-9 items-center pl-4 py-4'>
-        {/* <img className='w-[50px] object-fill' src={Logo} alt="Logo" /> */}
-        <p className='text-black-500 text-3xl font-bold'>IMDB 🎬</p>
-        <Link to ='/'className='text-blue-500 text-3xl font-bold' >MOVIES</Link>
-        <Link to ='/watchlist' className='text-red-500 text-3xl font-bold'>WATCHLIST</Link>
-    </div>
-  )
-}
+  const { isDarkMode, toggleTheme } = useTheme();
 
-export default Navbar
+  return (
+    <div
+      className="flex flex-wrap border items-center justify-between px-4 py-4 
+      dark:bg-dark-background dark:border-gray-700 
+      bg-light-background transition-colors duration-300"
+    >
+      <div className="flex items-center space-x-4">
+        <Link to="/">
+          <p className="text-black-500 dark:text-white text-2xl md:text-3xl font-bold">
+            IMDB 🎬
+          </p>
+        </Link>
+        <nav className="flex space-x-4">
+          <Link
+            to="/"
+            className="text-blue-500 dark:text-blue-300 text-xl md:text-2xl font-bold 
+              hover:text-blue-700 dark:hover:text-blue-200 transition-colors"
+          >
+            MOVIES
+          </Link>
+          <Link
+            to="/watchlist"
+            className="text-red-500 dark:text-red-300 text-xl md:text-2xl font-bold 
+              hover:text-red-700 dark:hover:text-red-200 transition-colors"
+          >
+            WATCHLIST
+          </Link>
+        </nav>
+      </div>
+
+      <button
+        onClick={toggleTheme}
+        className="p-2 rounded-full 
+          bg-gray-200 dark:bg-gray-700 
+          hover:bg-gray-300 dark:hover:bg-gray-600 
+          transition-colors"
+      >
+        {isDarkMode ? (
+          <Sun className="text-yellow-500" size={24} />
+        ) : (
+          <Moon className="text-indigo-600" size={24} />
+        )}
+      </button>
+    </div>
+  );
+};
+
+export default Navbar;
