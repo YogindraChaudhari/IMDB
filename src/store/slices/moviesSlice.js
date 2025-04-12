@@ -40,6 +40,8 @@ const moviesSlice = createSlice({
     currentPage: 1,
     totalPages: 0,
     searchQuery: "",
+    PopularMovies: [],
+    searchResults: [],
   },
   reducers: {
     setCurrentPage: (state, action) => {
@@ -59,6 +61,8 @@ const moviesSlice = createSlice({
         state.list = action.payload.results;
         state.totalPages = action.payload.total_pages;
         state.currentPage = action.payload.page;
+        state.PopularMovies = action.payload.results;
+        state.searchQuery = action.payload.query || "";
       })
       .addCase(fetchPopularMovies.rejected, (state, action) => {
         state.status = "failed";
