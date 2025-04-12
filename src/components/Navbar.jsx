@@ -8,9 +8,9 @@ const Navbar = () => {
 
   return (
     <div
-      className="flex flex-wrap border items-center justify-between px-4 py-4 
-      dark:bg-dark-background dark:border-gray-700 
-      bg-light-background transition-colors duration-300"
+      className="sticky top-0 z-50 flex flex-wrap border items-center justify-between px-4 py-4 
+  dark:bg-dark-background dark:border-gray-700 
+  bg-light-background transition-colors duration-300"
     >
       <div className="flex items-center space-x-4">
         <Link to="/">
@@ -41,7 +41,7 @@ const Navbar = () => {
         className="p-2 rounded-full 
           bg-gray-200 dark:bg-gray-700 
           hover:bg-gray-300 dark:hover:bg-gray-600 
-          transition-colors"
+          transition-colors self-start md:self-auto"
       >
         {isDarkMode ? (
           <Sun className="text-yellow-500" size={24} />
