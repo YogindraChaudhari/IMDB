@@ -11,10 +11,13 @@ import {
   sortPopularityAsc,
   sortPopularityDesc,
 } from "../store/slices/watchlistSlice.js";
+import MovieDetailsModal from "./MovieDetailsModal.jsx";
 
 function WatchList() {
   const [isGenreMenuOpen, setIsGenreMenuOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   const dispatch = useDispatch();
   const {
     list: watchlist,
@@ -284,7 +287,10 @@ function WatchList() {
                       loading="lazy"
                     />
                     <div className="ml-4 flex-1">
-                      <h3 className="font-semibold text-lg mb-1">
+                      <h3
+                        className="font-semibold text-lg mb-1 cursor-pointer hover:underline"
+                        onClick={() => setSelectedMovie(movieObj)}
+                      >
                         {movieObj.title}
                       </h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
@@ -376,7 +382,10 @@ function WatchList() {
                           loading="lazy"
                         />
                         <div>
-                          <span className="font-semibold dark:text-gray-200 block">
+                          <span
+                            className="font-semibold dark:text-gray-200 block cursor-pointer hover:underline"
+                            onClick={() => setSelectedMovie(movieObj)}
+                          >
                             {movieObj.title}
                           </span>
                           <span className="text-xs text-gray-500 dark:text-gray-400 block">
@@ -423,6 +432,12 @@ function WatchList() {
             </table>
           </div>
         </>
+      )}
+      {selectedMovie && (
+        <MovieDetailsModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
       )}
     </div>
   );

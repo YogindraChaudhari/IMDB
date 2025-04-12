@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   searchMovies,
   fetchPopularMovies,
@@ -11,18 +12,20 @@ function SearchBar() {
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
-  const { searchQuery, PopularMovies } = useSelector((state) => state.movies);
+  const navigate = useNavigate();
+  const { searchQuery, popularMovies } = useSelector((state) => state.movies);
 
   useEffect(() => {
-    if (PopularMovies.length === 0) {
+    if (popularMovies.length === 0) {
       dispatch(fetchPopularMovies(1));
     }
-  }, [dispatch, PopularMovies]);
+  }, [dispatch, popularMovies]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      dispatch(searchMovies(query));
+      dispatch(searchMovies({ query: query.trim() }));
+      navigate("/search"); // Navigate to search results page
       setIsFocused(false);
     }
   };
@@ -36,16 +39,19 @@ function SearchBar() {
   const getFilteredSuggestions = () => {
     const lowerQuery = query.toLowerCase().trim();
 
-    if (!lowerQuery) return PopularMovies.slice(0, 5);
+    if (!lowerQuery) return popularMovies.slice(0, 5);
 
-    return PopularMovies.filter((movie) =>
-      movie.title.toLowerCase().startsWith(lowerQuery)
-    ).slice(0, 5);
+    return popularMovies
+      .filter((movie) =>
+        (movie.title || movie.name || "").toLowerCase().includes(lowerQuery)
+      )
+      .slice(0, 5);
   };
 
   const handleSuggestionClick = (title) => {
     setQuery(title);
-    dispatch(searchMovies(title));
+    dispatch(searchMovies({ query: title }));
+    navigate("/search"); // Navigate to search results page
     setIsFocused(false);
   };
 
@@ -87,12 +93,12 @@ function SearchBar() {
           {suggestions.map((movie) => (
             <li
               key={movie.id}
-              onClick={() => handleSuggestionClick(movie.title)}
+              onClick={() => handleSuggestionClick(movie.title || movie.name)}
               className="flex items-center px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
             >
               {!query && <Flame className="text-yellow-500 mr-2" size={16} />}
               <span className="text-sm text-gray-800 dark:text-gray-200">
-                {movie.title}
+                {movie.title || movie.name}
               </span>
             </li>
           ))}
