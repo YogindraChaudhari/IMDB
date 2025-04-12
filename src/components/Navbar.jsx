@@ -12,7 +12,7 @@ const Navbar = () => {
   dark:bg-dark-background dark:border-gray-700 
   bg-light-background transition-colors duration-300"
     >
-      <div className="flex items-center space-x-4">
+      <div className="flex flex-wrap items-center space-x-4">
         <Link to="/">
           <p className="text-black-500 dark:text-white text-2xl md:text-3xl font-bold">
             IMDB 🎬
