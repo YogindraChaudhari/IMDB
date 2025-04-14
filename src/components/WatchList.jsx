@@ -110,7 +110,7 @@ function WatchList() {
                         }}
                         className={`p-3 cursor-pointer rounded-md ${
                           filteredGenre === genre
-                            ? "bg-yellow-500 text-white dark:bg-yellow-600"
+                            ? "bg-yellow-400 text-white dark:bg-yellow-500"
                             : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
                         } transition-colors`}
                       >
@@ -176,7 +176,7 @@ function WatchList() {
                 {/* Apply button */}
                 <button
                   onClick={() => setIsMobileFiltersOpen(false)}
-                  className="w-full py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                  className="w-full py-3 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition-colors"
                 >
                   Apply Filters
                 </button>
