@@ -81,7 +81,7 @@ function SearchBar() {
           )}
           <button
             type="submit"
-            className="bg-yellow-500 hover:bg-yellow-600 text-black p-3 px-4 transition-colors"
+            className="bg-yellow-500 hover:bg-yellow-600 text-black p-3.5 px-4 transition-colors"
           >
             <Search size={20} />
           </button>
@@ -109,7 +109,7 @@ function SearchBar() {
           Showing results for: <span className="font-bold">{searchQuery}</span>
           <button
             onClick={clearSearch}
-            className="ml-2 text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+            className="ml-2 font-bold text-yellow-400 hover:text-yellow-500 dark:font-bold dark:text-yellow-400 dark:hover:text-yellow-500"
           >
             Clear
           </button>

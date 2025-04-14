@@ -53,7 +53,9 @@ function WatchList() {
         genreids[movieObj.genre_ids[0]] === filteredGenre
     )
     .filter((movieObj) =>
-      (movieObj.title || "").toLowerCase().includes(searchTerm.toLowerCase())
+      (movieObj.title || movieObj.name || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
     );
 
   return (
@@ -69,7 +71,7 @@ function WatchList() {
             href="/"
             className="px-6 py-2 bg-yellow-500 text-black rounded-full hover:bg-yellow-600 transition-colors"
           >
-            Browse Movies
+            Browse Movies And Series
           </a>
         </div>
       ) : (
@@ -258,7 +260,8 @@ function WatchList() {
           {/* Stats summary */}
           <div className="flex flex-wrap items-center justify-between mb-4 px-2">
             <div className="text-sm text-yellow-600 dark:text-yellow-400 mb-2 sm:mb-0">
-              Showing {filteredMovies.length} of {watchlist.length} movies
+              Showing {filteredMovies.length} of {watchlist.length} from watch
+              list
             </div>
 
             {filteredGenre !== "All Genres" && (
@@ -283,7 +286,7 @@ function WatchList() {
                     <img
                       className="h-32 w-24 object-cover rounded"
                       src={`https://image.tmdb.org/t/p/w92/${movieObj.poster_path}`}
-                      alt={movieObj.title}
+                      alt={movieObj.title || movieObj.name}
                       loading="lazy"
                     />
                     <div className="ml-4 flex-1">
@@ -291,11 +294,15 @@ function WatchList() {
                         className="font-semibold text-lg mb-1 cursor-pointer hover:underline"
                         onClick={() => setSelectedMovie(movieObj)}
                       >
-                        {movieObj.title}
+                        {movieObj.title || movieObj.name}
                       </h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                        {movieObj.release_date?.substring(0, 4)} •{" "}
-                        {genreids[movieObj.genre_ids[0]]}
+                        {(
+                          movieObj.release_date ||
+                          movieObj.first_air_date ||
+                          ""
+                        ).substring(0, 4)}{" "}
+                        • {genreids[movieObj.genre_ids[0]]}
                       </p>
                       <div className="flex items-center mb-3">
                         <Star size={16} className="text-yellow-500 mr-1" />
@@ -317,7 +324,7 @@ function WatchList() {
               ))
             ) : (
               <div className="text-center py-10 text-gray-500 dark:text-gray-400">
-                No movies found matching your criteria.
+                No movie or series found matching your criteria.
               </div>
             )}
           </div>
@@ -378,7 +385,7 @@ function WatchList() {
                         <img
                           className="h-24 w-16 object-cover mr-4 rounded"
                           src={`https://image.tmdb.org/t/p/w92/${movieObj.poster_path}`}
-                          alt={movieObj.title}
+                          alt={movieObj.title || movieObj.name}
                           loading="lazy"
                         />
                         <div>
@@ -386,10 +393,14 @@ function WatchList() {
                             className="font-semibold dark:text-gray-200 block cursor-pointer hover:underline"
                             onClick={() => setSelectedMovie(movieObj)}
                           >
-                            {movieObj.title}
+                            {movieObj.title || movieObj.name}
                           </span>
                           <span className="text-xs text-gray-500 dark:text-gray-400 block">
-                            {movieObj.release_date?.substring(0, 4)}
+                            {(
+                              movieObj.release_date ||
+                              movieObj.first_air_date ||
+                              ""
+                            ).substring(0, 4)}
                           </span>
                         </div>
                       </td>
