@@ -435,7 +435,7 @@ function WatchList() {
                       colSpan="5"
                       className="text-center py-10 text-gray-500 dark:text-gray-400"
                     >
-                      No movies found matching your criteria.
+                      No movie or series found matching your criteria.
                     </td>
                   </tr>
                 )}
